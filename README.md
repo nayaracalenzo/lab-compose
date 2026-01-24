@@ -161,6 +161,67 @@ curl -s http://localhost:8080 | head -n 30
 
 ---
 
+---
+
+## Evidências (para entrega)
+
+Tire prints (ou cole o output) de:
+
+1. **Arquivos do LAB criados**
+   ```bash
+   ls -l
+   # deve aparecer: docker-compose.yml e nginx.conf
+   ```
+
+2. **Stack em pé (Compose)**
+   ```bash
+   docker compose ps
+   ```
+
+3. **Teste pelo host (nginx → whoami)**
+   ```bash
+   curl -s http://localhost:8080 | head -n 20
+   ```
+
+4. **Logs por serviço (dia a dia)**
+   - Nginx:
+     ```bash
+     docker compose logs --tail 50 nginx
+     ```
+   - Whoami:
+     ```bash
+     docker compose logs --tail 50 whoami
+     ```
+
+5. **Healthcheck em ação**
+   ```bash
+   docker compose ps
+   # print do STATUS mostrando "healthy" (quando estiver ok)
+   ```
+
+6. **Mudança de env + recriação de 1 serviço (somente whoami)**
+   - Print do recreate:
+     ```bash
+     docker compose up -d --no-deps --force-recreate whoami
+     ```
+   - Print do curl mostrando o novo nome (WHOAMI_NAME):
+     ```bash
+     curl -s http://localhost:8080 | head -n 30
+     ```
+
+Sugestão de pasta para organizar:
+
+- `evidencias/` com:
+  - `01-ls.png`
+  - `02-compose-ps.png`
+  - `03-curl.png`
+  - `04-logs-nginx.png`
+  - `05-logs-whoami.png`
+  - `06-healthcheck.png`
+  - `07-recreate.png`
+  - `08-curl-v2.png`
+
+
 ## 7) Limpeza
 
 ```bash
